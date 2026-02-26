@@ -1374,7 +1374,8 @@ will not necessarily be close to zero::
 
     However (adjusted or unadjusted) Rand index can also be useful in a purely
     unsupervised setting as a building block for a Consensus Index that can be
-    used for clustering model selection (TODO).
+    used for clustering model selection (see `Consensus Clustering
+    <https://en.wikipedia.org/wiki/Consensus_clustering>`_).
 
   - The **unadjusted Rand index is often close to 1.0** even if the clusterings
     themselves differ significantly. This can be understood when interpreting
@@ -1432,6 +1433,13 @@ will not necessarily be close to zero::
     <https://en.wikipedia.org/wiki/Rand_index#Adjusted_Rand_index>`_
 
   * :doi:`Minimum adjusted Rand index for two clusterings of a given size, 2022, J. E. Chacón and A. I. Rastrojo <10.1007/s11634-022-00491-w>`
+
+  * `Wikipedia entry for Consensus Clustering
+    <https://en.wikipedia.org/wiki/Consensus_clustering>`_
+
+  * :doi:`Consensus clustering: A resampling-based method for class discovery
+    and visualization of gene expression microarray data, 2003, S. Monti,
+    P. Tamayo, J. Mesirov, T. Golub <10.1023/A:1023949509487>`
 
 
 .. _mutual_info_score:

@@ -473,6 +473,22 @@ def test_logistic_cv(global_random_seed, use_legacy_attributes):
         assert lr_cv.scores_.shape == (n_cv, n_l1_ratios, n_Cs)
 
 
+# TODO(1.11): remove filterwarnings with change of default scoring
+@pytest.mark.filterwarnings("ignore:The default value.*scoring.*:FutureWarning")
+def test_logistic_cv_refit_false_non_elasticnet(global_random_seed):
+    # Non-regression test for: https://github.com/scikit-learn/scikit-learn/issues/33885
+    # make sure refit=False and use_legacy_attributes=False don't raise TypeError
+    X, y = make_classification(random_state=global_random_seed)
+    lr_cv = LogisticRegressionCV(
+        l1_ratios=[0.0],
+        refit=False,
+        use_legacy_attributes=False,
+        random_state=global_random_seed,
+    )
+    lr_cv.fit(X, y)
+    assert lr_cv.l1_ratio_ == 0.0
+
+
 def test_logistic_cv_mock_scorer():
     """Test that LogisticRegressionCV calls the scorer."""
 

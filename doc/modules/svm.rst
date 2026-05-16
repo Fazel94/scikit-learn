@@ -209,6 +209,7 @@ the decision function.
 .. rubric:: Examples
 
 * :ref:`sphx_glr_auto_examples_svm_plot_iris_svc.py`
+* :ref:`sphx_glr_auto_examples_svm_plot_linearsvc_multiclass.py`
 
 .. _scores_probabilities:
 

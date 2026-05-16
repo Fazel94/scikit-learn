@@ -1,0 +1,6 @@
+- Added a reference to the Crammer and Singer (2001) paper in
+  :class:`sklearn.svm.LinearSVC` for the ``multi_class`` parameter, and a
+  gallery example (:ref:`sphx_glr_auto_examples_svm_plot_linearsvc_multiclass.py`)
+  comparing One-vs-Rest, One-vs-One, and Crammer-Singer multi-class strategies
+  on Iris, Digits, and a synthetic overlapping-class benchmark.
+  By :user:`Mohamad Fazeli <Fazel94>`.

@@ -2532,7 +2532,7 @@ model* train(const problem *prob, const parameter *param, BlasFunctions *blas_fu
 			for(i=0;i<nr_class;i++)
 				for(j=start[i];j<start[i]+count[i];j++)
 					sub_prob.y[j] = i;
-			Solver_MCSVM_CS Solver(&sub_prob, nr_class, weighted_C, param->eps);
+			Solver_MCSVM_CS Solver(&sub_prob, nr_class, weighted_C, param->eps, param->max_iter);
 			model_->n_iter[0]=Solver.Solve(model_->w);
 		}
 		else

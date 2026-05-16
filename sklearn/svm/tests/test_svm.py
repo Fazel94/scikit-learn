@@ -881,6 +881,33 @@ def test_linearsvc_crammer_singer(global_random_seed):
     assert_array_almost_equal(dec_func, cs_clf.decision_function(iris.data))
 
 
+@pytest.mark.filterwarnings("ignore::sklearn.exceptions.ConvergenceWarning")
+def test_linearsvc_crammer_singer_respects_max_iter(global_random_seed):
+    # Non-regression test: the Crammer-Singer solver used to silently ignore
+    # `max_iter` because the C++ call site in `linear.cpp` constructed
+    # `Solver_MCSVM_CS` without passing `param->max_iter`, so the solver
+    # always ran to its internal default cap of 100000 epochs.
+    #
+    # If the cap is honoured, a one-epoch fit produces materially different
+    # coefficients from a fully-converged fit. If the cap is ignored, both
+    # fits converge to the same solution and the coefficients match.
+    iris = get_iris_dataset(global_random_seed)
+
+    common = dict(
+        multi_class="crammer_singer",
+        random_state=global_random_seed,
+        dual=True,
+        tol=1e-12,  # force the cap, not tol, to decide termination
+    )
+
+    truncated = svm.LinearSVC(max_iter=1, **common).fit(iris.data, iris.target)
+    converged = svm.LinearSVC(max_iter=100000, **common).fit(iris.data, iris.target)
+
+    # The two coef_ arrays must differ — if max_iter were still ignored, both
+    # fits would run to convergence and produce identical coefficients.
+    assert not np.allclose(truncated.coef_, converged.coef_)
+
+
 def test_linearsvc_fit_sampleweight(global_random_seed):
     # check correct result when sample_weight is 1
     n_samples = len(X)
